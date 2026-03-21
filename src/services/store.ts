@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { useState, ChangeEvent } from 'react';
 
 import {
   TypedUseSelectorHook,
@@ -33,5 +34,18 @@ export type AppDispatch = typeof store.dispatch;
 
 export const useDispatch: () => AppDispatch = dispatchHook;
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
+
+export const useForm = <T extends Record<string, string>>(
+  initialValues: T
+) => {
+  const [values, setValues] = useState<T>(initialValues);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  return { values, handleChange, setValues };
+};
 
 export default store;
