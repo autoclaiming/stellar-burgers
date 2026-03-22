@@ -48,4 +48,5 @@ export const useForm = <T extends Record<string, string>>(
   return { values, handleChange, setValues };
 };
 
+export { rootReducer };
 export default store;
