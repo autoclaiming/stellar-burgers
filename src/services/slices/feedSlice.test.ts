@@ -17,6 +17,7 @@ describe('feedSlice', () => {
 
   test('fulfilled — записывает ленту заказов', () => {
     const feedData = {
+      success: true,
       orders: [
         {
           _id: 'feed1',

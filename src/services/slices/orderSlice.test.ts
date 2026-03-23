@@ -21,7 +21,14 @@ describe('orderSlice', () => {
       createdAt: '2024-01-15',
       updatedAt: '2024-01-15',
       number: 54321,
-      ingredients: ['id1', 'id2']
+      ingredients: ['id1', 'id2'],
+      owner: {
+        name: 'Test',
+        email: 'test@test.com',
+        createdAt: '2024-01-15',
+        updatedAt: '2024-01-15'
+      },
+      price: 1500
     };
     const state = reducer(initialState, createOrder.fulfilled(order, '', []));
     expect(state.order).toEqual(order);

@@ -35,9 +35,7 @@ export type AppDispatch = typeof store.dispatch;
 export const useDispatch: () => AppDispatch = dispatchHook;
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
 
-export const useForm = <T extends Record<string, string>>(
-  initialValues: T
-) => {
+export const useForm = <T extends Record<string, string>>(initialValues: T) => {
   const [values, setValues] = useState<T>(initialValues);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

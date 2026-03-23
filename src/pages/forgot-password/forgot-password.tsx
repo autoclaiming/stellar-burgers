@@ -1,4 +1,4 @@
-import { FC, useState, SyntheticEvent } from 'react';
+import { FC, useState, SyntheticEvent, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { forgotPasswordApi } from '@api';
@@ -27,7 +27,12 @@ export const ForgotPassword: FC = () => {
     <ForgotPasswordUI
       errorText={error?.message}
       email={values.email}
-      setEmail={(val) => setValues((prev) => ({ ...prev, email: val }))}
+      setEmail={(val: SetStateAction<string>) =>
+        setValues((prev) => ({
+          ...prev,
+          email: typeof val === 'function' ? val(prev.email) : val
+        }))
+      }
       handleSubmit={handleSubmit}
     />
   );

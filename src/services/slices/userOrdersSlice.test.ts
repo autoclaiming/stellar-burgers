@@ -25,10 +25,7 @@ describe('userOrdersSlice', () => {
         ingredients: ['ing1']
       }
     ];
-    const state = reducer(
-      initialState,
-      getUserOrders.fulfilled(orders, '')
-    );
+    const state = reducer(initialState, getUserOrders.fulfilled(orders, ''));
     expect(state.orders).toEqual(orders);
     expect(state.isLoading).toBe(false);
   });

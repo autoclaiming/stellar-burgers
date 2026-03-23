@@ -30,11 +30,10 @@ describe('userSlice', () => {
   test('loginUser.rejected — записывает ошибку', () => {
     const state = reducer(
       initialState,
-      loginUser.rejected(
-        new Error('Неверный пароль'),
-        '',
-        { email: '', password: '' }
-      )
+      loginUser.rejected(new Error('Неверный пароль'), '', {
+        email: '',
+        password: ''
+      })
     );
     expect(state.loginError).toBe('Неверный пароль');
   });
