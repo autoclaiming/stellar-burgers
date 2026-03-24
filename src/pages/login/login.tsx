@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent } from 'react';
+import { FC, SyntheticEvent, SetStateAction } from 'react';
 import { LoginUI } from '@ui-pages';
 import { useDispatch, useSelector, useForm } from '../../services/store';
 import { loginUser, selectLoginError } from '@slices/userSlice';
@@ -17,9 +17,19 @@ export const Login: FC = () => {
     <LoginUI
       errorText={loginError || ''}
       email={values.email}
-      setEmail={(val) => setValues((prev) => ({ ...prev, email: val }))}
+      setEmail={(val: SetStateAction<string>) =>
+        setValues((prev) => ({
+          ...prev,
+          email: typeof val === 'function' ? val(prev.email) : val
+        }))
+      }
       password={values.password}
-      setPassword={(val) => setValues((prev) => ({ ...prev, password: val }))}
+      setPassword={(val: SetStateAction<string>) =>
+        setValues((prev) => ({
+          ...prev,
+          password: typeof val === 'function' ? val(prev.password) : val
+        }))
+      }
       handleSubmit={handleSubmit}
     />
   );

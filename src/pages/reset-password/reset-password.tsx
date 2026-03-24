@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { FC, SyntheticEvent, useEffect, useState, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { resetPasswordApi } from '@api';
@@ -32,8 +32,18 @@ export const ResetPassword: FC = () => {
       errorText={error?.message}
       password={values.password}
       token={values.token}
-      setPassword={(val) => setValues((prev) => ({ ...prev, password: val }))}
-      setToken={(val) => setValues((prev) => ({ ...prev, token: val }))}
+      setPassword={(val: SetStateAction<string>) =>
+        setValues((prev) => ({
+          ...prev,
+          password: typeof val === 'function' ? val(prev.password) : val
+        }))
+      }
+      setToken={(val: SetStateAction<string>) =>
+        setValues((prev) => ({
+          ...prev,
+          token: typeof val === 'function' ? val(prev.token) : val
+        }))
+      }
       handleSubmit={handleSubmit}
     />
   );
